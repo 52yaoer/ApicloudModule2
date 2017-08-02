@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Module Develop</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<style type="text/css">
+			html, body {
+				height: 100%
+			}
+			body {
+				background-color: #fff;
+				margin: 0;
+			}
+			#wrap {
+				height: 100%;
+				position: relative;
+			}
+			#header {
+				padding-top: 20px;
+				background-color: #5082c2;
+				height: 44px;
+				position: relative;
+			}
+			#header h1 {
+				font-size: 20px;
+				height: 44px;
+				line-height: 44px;
+				margin: 0em;
+				color: #fff;
+				margin-left: 100px;
+				margin-right: 100px;
+				text-align: center;
+			}
+			#main {
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-box-pack: center;
+			}
+			a.button {
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-box-pack: center;
+				-webkit-box-align: center;
+				height: 32px;
+				margin: 8px;
+				background-color: rgba(240,240,240,1.0);
+				border-color: rgba(220,220,220,1.0);
+				border-width: 2px;
+				border-style: solid;
+			}
+			a.active {
+				background-color: rgba(240,240,240,0.7);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="main">
+				<a class="button" tapmode="active" onclick="init()" >初始化</a>     
+				 <a class="button" tapmode="active" onclick="setOutputPower()" >设置发射功率</a>    
+				 <a class="button" tapmode="active" onclick="inventoryMulti()" >多标签盘存</a>    
+				 <a class="button" tapmode="active" onclick="stopInventoryMulti()" >停止多标签盘存</a>    
+				 <a class="button" tapmode="active" onclick="inventoryRealTime()" >实时盘存</a>    
+				 <a class="button" tapmode="active" onclick="selectEPC()" >选择标签</a>    
+				 <a class="button" tapmode="active" onclick="unSelect()" >取消选择标签</a>    
+				 <a class="button" tapmode="active" onclick="readFrom6C()" >读标签数据</a>    
+				 <a class="button" tapmode="active" onclick="writeTo6C()" >写标签数据</a>    
+				 <a class="button" tapmode="active" onclick="setFrequency()" >调节工作频率</a>    
+				 <a class="button" tapmode="active" onclick="setWorkArea()" >设置区域频率</a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script>
+		var demo;
+
+		function apiready() {
+			demo = api.require('rfid');
+			if (!demo) {
+				alert("请添加模块后编译");
+				return;
+			}
+		}
+		
+		
+		function getInstance(){
+	        demo.getInstance(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function setOutputPower(){
+	        demo.setOutputPower({
+	        	power : 26
+	        },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+	    
+	    function inventoryMulti(){
+	        demo.inventoryMulti(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function stopInventoryMulti(){
+	        demo.stopInventoryMulti(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function inventoryRealTime(){
+	        demo.inventoryRealTime(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function selectEPC(){
+	        demo.selectEPC({
+	        	epc : ''
+	        },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function unSelect(){
+	        demo.unSelect(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function unSelect(){
+	        demo.unSelect(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function readFrom6C(){
+	        demo.readFrom6C({
+	        	accessPassword : '',//密码4个字节
+	        	memBank : 0,		//存储区 : RESEVER 区0，EPC 区1，TID区 2，USER区 3；
+	        	startAddr : 0,		//起始地址（不可过大，视数据区大小而定）；
+	        	length : 1     		//读数据长度，其单位为word(1word = 2bytes);
+	        },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function writeTo6C(){
+	        demo.writeTo6C({
+	        	accessPassword : '',//密码4个字节
+	        	memBank : 0,		//存储区 : RESEVER 区0，EPC 区1，TID区 2，USER区 3；
+	        	startAddr : 0,		//起始地址（不可过大，视数据区大小而定）；
+	        	data : ''  			//写入数据
+	        },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function setFrequency(){
+	        demo.setFrequency({
+	        	startFrequency : 0,	//起始频率
+	        	freqSpace : 0,		//频点间隔
+	        	freqQuality : 0  	//频点数
+	        },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		
+		function setWorkArea(){
+	        demo.setWorkArea({
+	        	area : 1	//area =  1 中国2;area = 2 美标;area = 3 欧标;area = 4 中国1;area = 5 韩国
+	        },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+	</script>
+</html>
